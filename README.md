@@ -111,32 +111,27 @@ python train.py --dataset tiny  --size_crops 56 36 --output_dir tiny --batch_siz
 Through the argument '--cpt_load_path', it is parsed the full path of the stored model.
 
 ```
-python test.py --dataset c10 --batch_size 256 --size_crops 28 18 \\
-        --cpt_load_path c10/imc_swav.cpt
+python test.py --dataset c10 --size_crops 28 18 --cpt_load_path c10/imc_swav.cpt
 ```
 
 ```
-python test.py --dataset c100-20 --batch_size 256 --size_crops 28 18 \\
-        --cpt_load_path c20/imc_swav.cpt
+python test.py --dataset c20  --size_crops 28 18 --cpt_load_path c20/imc_swav.cpt
 ```
 
 ```
-python test.py --dataset c100 --batch_size 256 --size_crops 28 18 \\
-        --cpt_load_path c100/imc_swav.cpt
+python test.py --dataset c100 --size_crops 28 18 --cpt_load_path c100/imc_swav.cpt
 ```
 
 ##### Example evaluation on STL10:
 
 ```
-python test.py --dataset STL10 --batch_size 256 --size_crops 76 52 \\
-        --cpt_load_path stl10/imc_swav.cpt
+python test.py --dataset STL10 --size_crops 76 52 --cpt_load_path stl10/imc_swav.cpt
 ```
 
 ##### Example evaluation on Tiny-Imagenet:
 
 ```
-python test.py --dataset tiny --batch_size 512 --size_crops 56 36 \\
-        --cpt_load_path tiny/tiny.cpt
+python test.py --dataset tiny --size_crops 56 36 --cpt_load_path tiny/tiny.cpt
 ```
 
 ## Notes

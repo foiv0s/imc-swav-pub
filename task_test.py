@@ -28,10 +28,6 @@ if args.dev is not None:
     os.environ["CUDA_VISIBLE_DEVICES"] = args.dev
 
 
-def test(model, test_loader, device, stats):
-    test_model(model, test_loader, device, stats)
-
-
 def main():
     # get the dataset
     dataset = get_dataset(args.dataset)
@@ -46,7 +42,7 @@ def main():
     model = model.to(torch_device)
 
     test_stats = AverageMeterSet()
-    test(model, test_loader, torch_device, test_stats)
+    test_model(model, test_loader, torch_device, test_stats)
     stat_str = test_stats.pretty_string()
     print(stat_str)
 
