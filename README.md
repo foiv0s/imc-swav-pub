@@ -1,7 +1,7 @@
 # Information Maximization Clustering via  Multi-View Self-Labelling
 
 ## Introduction
-**This is implementation code written in Python (version 3.6.9) of IMC-SwAV based on manuscript [paper](https://arxiv.org/abs/2103.07368)
+**This is an implementation code written in Python (version 3.6.9) of IMC-SwAV based on manuscript [paper](https://arxiv.org/abs/2103.07368)
 **
 
 <tr>
@@ -13,7 +13,7 @@
 ## Performance
 
 The reported performance of our proposed model is based on ResNet18 encoder architecture.<br>
-We train our IMC-SwAV for 15 independent runs on training set, and we report the result of testing set only. 
+We train our IMC-SwAV for 15 independent runs on training set and we report the result of testing set only. 
 
 ### Average Performance
 
@@ -22,7 +22,7 @@ Table of average performance and the corresponding standard deviation.
 Dataset | Acc | NMI | ARI
 --- | --- | --- | ---
 CIFAR-10|89.1  (±0.5) | 81.1  (±0.7)| 79.0 (±1.0)
-CIFAR-20 | 49.0 (±1.8)| 50.3 (±1.2) | 33.7 (±1.3)
+CIFAR-100-20 | 49.0 (±1.8)| 50.3 (±1.2) | 33.7 (±1.3)
 STL10| 83.1  (±1.0) | 72.9 (±0.9) | 68.5  (±1.4)
 Tiny-Imagenet| 27.9  (±0.3) | 48.5 (±2.0) | 14.3  (±2.1)
 
@@ -33,7 +33,7 @@ Below table reports the best recorded performance from our model.
 Dataset | Acc | NMI | ARI
 --- | --- | --- | ---
 CIFAR-10|89.7 | 81.8| 80.0
-CIFAR-20 | 51.9| 52.7 | 36.1
+CIFAR-100-20 | 51.9| 52.7 | 36.1
 STL10| 85.3 | 74.7 | 71.6
 Tiny-Imagenet| 28.2 | 52.6 | 14.6
 
@@ -45,7 +45,7 @@ CIFAR-100| 45.1 | 67.5 | 60.8 | 30.7
 
 ## Usage
 
-All hyper parameters applied across all datasets (default setup/experiment) in the submission document as following:
+All hyper parameters apply across all datasets (default setup/experiment) in the submission document as following:
 
 Settings related with the multi-crop \
 --nmb_crops 2 4 \
@@ -66,9 +66,9 @@ Settings related to the training \
 Settings related to the dataset <br>
 --path ROOT_DIRECTORY_OF_THE_DATASET (the path folder of the dataset)
 
-To run any of the code, it is required the directory path of the dataset <br>
+To run any of the code, the directory path of the dataset is required<br>
 otherwise it will automatically download to './dataset'
-#### CIFAR10
+#### CIFAR-10
 
 To run the training code.
 
@@ -77,7 +77,7 @@ python train.py --dataset C10 --path ./dataset --size_crops 28 18 \
       --output_dir ./c10 --cpt_name c10.cpt 
 ```
 
-#### CIFAR20
+#### CIFAR-100/20
 
 To run the training code.
 
@@ -114,9 +114,9 @@ python train.py --dataset tiny --path ./dataset --size_crops 56 36 --batch_size 
 ```
 ## The evaluation of the model.
 
-##### Example evaluation on CIFAR10/20/100:
+##### Example evaluation on CIFAR10/100-20/100:
 
-Through the argument '--cpt_load_path', it is parsed the full path of the stored model.
+Through the argument '--cpt_load_path', the full path of the stored model is parsed.
 
 ```
 python test.py --dataset c10 --path ./dataset --size_crops 28 18 --cpt_load_path ./c10/imc_swav.cpt
