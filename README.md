@@ -61,7 +61,7 @@ Settings related with SwAV \
 Settings related to the training \
 --learning_rate 0.0005 \
 --warmup 500 <br> 
---l2_w 1e-4
+--l2_w 1e-5
 
 Settings related to the dataset <br>
 --path ROOT_DIRECTORY_OF_THE_DATASET (the path folder of the dataset)
