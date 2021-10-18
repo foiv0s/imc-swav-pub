@@ -61,11 +61,7 @@ class Transforms:
         return multi_crops, self.test_transform(inp)
 
 
-def build_dataset(dataset, batch_size, nmb_workers, nmb_crops, size_crops, min_scale_crops, max_scale_crops):
-    win32 = 'C://tmp//'
-    linux_path = '~/data/' if socket.gethostname() == 'clws00081' else '/vol/research/fn_dataset/tmp/data/'
-    path = win32 if platform == "win32" else linux_path
-
+def build_dataset(dataset, batch_size, nmb_workers, nmb_crops, size_crops, min_scale_crops, max_scale_crops, path):
     if dataset == training_datasets[0]:
         num_classes = 10
         mu = [0.4914, 0.4822, 0.4465]
@@ -94,16 +90,13 @@ def build_dataset(dataset, batch_size, nmb_workers, nmb_crops, size_crops, min_s
         train_dataset = STL10(root=path, split='train+unlabeled', transform=train_transform, download=True)
         test_dataset = STL10(root=path, split='test', transform=test_transform, download=True)
     elif dataset == training_datasets[-1]:
-        win32 = './'
-        linux_path = '~/data/' if socket.gethostname() == 'clws00081' else '/vol/research/fn_dataset2/imc-swav/'
-        path = win32 if platform == "win32" else linux_path
         num_classes = 200
         mu = [0.485, 0.456, 0.406]
         std = [0.229, 0.224, 0.225]
         train_transform = Transforms(nmb_crops, size_crops, min_scale_crops, max_scale_crops, mu, std)
         test_transform = train_transform.test_transform
-        train_dataset = TinyImageNetDataset(path + 'ds/tiny', transform=train_transform, download=False, preload=True)
-        test_dataset = TinyImageNetDataset(path + 'ds/tiny', mode='val', transform=test_transform, download=False,
+        train_dataset = TinyImageNetDataset(path, transform=train_transform, download=False, preload=True)
+        test_dataset = TinyImageNetDataset(path, mode='val', transform=test_transform, download=False,
                                            preload=False)
     else:
         raise RuntimeError("Error not supported dataset {}".format(dataset))

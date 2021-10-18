@@ -50,8 +50,7 @@ All hyper parameters applied across all datasets (default setup/experiment) in t
 Settings related with the multi-crop \
 --nmb_crops 2 4 \
 --max_scale_crops 1. 0.4 \
---min_scale_crops 0.2 0.08 \
---batch_size 256
+--min_scale_crops 0.2 0.08
 
 Settings related with SwAV \
 --tau 0.1 \
@@ -64,12 +63,18 @@ Settings related to the training \
 --warmup 500 <br> 
 --l2_w 1e-4
 
+Settings related to the dataset <br>
+--path ROOT_DIRECTORY_OF_THE_DATASET (the path folder of the dataset)
+
+To run any of the code, it is required the directory path of the dataset <br>
+otherwise it will automatically download to './dataset'
 #### CIFAR10
 
 To run the training code.
 
 ```
-python train.py --dataset C10  --size_crops 28 18 --output_dir c10
+python train.py --dataset C10 --path ./dataset --size_crops 28 18 \
+      --output_dir ./c10 --cpt_name c10.cpt 
 ```
 
 #### CIFAR20
@@ -77,7 +82,8 @@ python train.py --dataset C10  --size_crops 28 18 --output_dir c10
 To run the training code.
 
 ```
-python train.py --dataset C20  --size_crops 28 18 --output_dir c20
+python train.py --dataset C20 --path ./dataset --size_crops 28 18  \
+      --output_dir ./c20 --cpt_name c20.cpt
 ```
 
 #### STL10
@@ -85,7 +91,8 @@ python train.py --dataset C20  --size_crops 28 18 --output_dir c20
 To run the training code.
 
 ```
-python train.py --dataset STL10  --size_crops 76 52 --output_dir stl10
+python train.py --dataset STL10 --path ./dataset --size_crops 76 52 \
+      --output_dir ./stl10 --cpt_name stl10.cpt --path ./dataset
 ```
 
 #### CIFAR100
@@ -93,7 +100,8 @@ python train.py --dataset STL10  --size_crops 76 52 --output_dir stl10
 To run the training code.
 
 ```
-python train.py --dataset C100  --size_crops 28 18 --output_dir c100 --batch_size 512
+python train.py --dataset C100 --path ./dataset --size_crops 28 18  --batch_size 512 \
+      --output_dir ./c100 --cpt_name c100.cpt
 ```
 
 #### Tiny-Imagenet
@@ -101,9 +109,9 @@ python train.py --dataset C100  --size_crops 28 18 --output_dir c100 --batch_siz
 To run the training code.
 
 ```
-python train.py --dataset tiny  --size_crops 56 36 --output_dir tiny --batch_size 512
+python train.py --dataset tiny --path ./dataset --size_crops 56 36 --batch_size 512 \
+      --output_dir ./tiny --cpt_name tiny.cpt
 ```
-
 ## The evaluation of the model.
 
 ##### Example evaluation on CIFAR10/20/100:
@@ -111,27 +119,27 @@ python train.py --dataset tiny  --size_crops 56 36 --output_dir tiny --batch_siz
 Through the argument '--cpt_load_path', it is parsed the full path of the stored model.
 
 ```
-python test.py --dataset c10 --size_crops 28 18 --cpt_load_path c10/imc_swav.cpt
+python test.py --dataset c10 --path ./dataset --size_crops 28 18 --cpt_load_path ./c10/imc_swav.cpt
 ```
 
 ```
-python test.py --dataset c20  --size_crops 28 18 --cpt_load_path c20/imc_swav.cpt
+python test.py --dataset c20 --path ./dataset --size_crops 28 18 --cpt_load_path ./c20/imc_swav.cpt
 ```
 
 ```
-python test.py --dataset c100 --size_crops 28 18 --cpt_load_path c100/imc_swav.cpt
+python test.py --dataset c100 --path ./dataset --size_crops 28 18 --cpt_load_path ./c100/imc_swav.cpt
 ```
 
 ##### Example evaluation on STL10:
 
 ```
-python test.py --dataset STL10 --size_crops 76 52 --cpt_load_path stl10/imc_swav.cpt
+python test.py --dataset STL10 --path ./dataset --size_crops 76 52 --cpt_load_path ./stl10/imc_swav.cpt
 ```
 
 ##### Example evaluation on Tiny-Imagenet:
 
 ```
-python test.py --dataset tiny --size_crops 56 36 --cpt_load_path tiny/tiny.cpt
+python test.py --dataset tiny --path ./dataset --size_crops 56 36 --cpt_load_path ./tiny/tiny.cpt
 ```
 
 ## Notes

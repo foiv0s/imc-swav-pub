@@ -10,6 +10,7 @@ parser = argparse.ArgumentParser(description='IMC-SwAV - Testing')
 
 parser.add_argument('--cpt_load_path', type=str, default=None, help='path from which to load checkpoint (if available)')
 parser.add_argument('--dataset', type=str, default='c10')
+parser.add_argument('--path', type=str, default=None, help='Root directory for the dataset')
 parser.add_argument('--nmb_workers', type=int, default=8, help='Number of workers on Transformation process')
 parser.add_argument("--nmb_crops", type=int, default=[2, 4], nargs="+",
                     help="list of number of crops (i.e.: [2, 4])")
@@ -35,7 +36,7 @@ def main():
     _, test_loader, num_classes = \
         build_dataset(dataset=dataset, batch_size=args.batch_size, nmb_workers=args.nmb_workers,
                       nmb_crops=args.nmb_crops, size_crops=args.size_crops,
-                      min_scale_crops=args.min_scale_crops, max_scale_crops=args.max_scale_crops)
+                      min_scale_crops=args.min_scale_crops, max_scale_crops=args.max_scale_crops, path=args.path)
     checkpointer = Checkpointer()
     torch_device = torch.device('cuda') if torch.cuda.device_count() > 0 else torch.device('cpu')
     model = checkpointer.restore_model_from_checkpoint(args.cpt_load_path)

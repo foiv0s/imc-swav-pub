@@ -12,6 +12,7 @@ from task_train import train_model
 parser = argparse.ArgumentParser(description='IMC-SwAV - Training')
 
 parser.add_argument('--dataset', type=str, default='C10')
+parser.add_argument('--path', type=str, default=None, help='Root directory for the dataset')
 
 # Transformation parameters/number of crops sizes. First index reports the high resolution, low resolutions follows.
 parser.add_argument('--nmb_workers', type=int, default=8, help='Number of workers on Transformation process')
@@ -44,7 +45,6 @@ parser.add_argument('--run_name', type=str, default='default_run', help='Tensorb
 parser.add_argument("--dev", type=str, help='GPU device number (if applying)')
 parser.add_argument("--l2_w", type=float, default=1e-5, help='l_2 weights')
 
-
 args = parser.parse_args()
 
 if args.dev is not None:
@@ -68,7 +68,7 @@ def main():
     train_loader, test_loader, num_classes = \
         build_dataset(dataset=dataset, batch_size=args.batch_size, nmb_workers=args.nmb_workers,
                       nmb_crops=args.nmb_crops, size_crops=args.size_crops,
-                      min_scale_crops=args.min_scale_crops, max_scale_crops=args.max_scale_crops)
+                      min_scale_crops=args.min_scale_crops, max_scale_crops=args.max_scale_crops, path=args.path)
 
     torch_device = torch.device('cuda') if torch.cuda.device_count() > 0 else torch.device('cpu')
     checkpointer = Checkpointer(args.output_dir, args.cpt_name)
